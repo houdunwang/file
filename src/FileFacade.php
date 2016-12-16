@@ -10,7 +10,7 @@
 
 use hdphp\kernel\ServiceFacade;
 
-class UploadFacade extends ServiceFacade {
+class FileFacade extends ServiceFacade {
 	public static function getFacadeAccessor() {
 		return 'Upload';
 	}

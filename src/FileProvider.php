@@ -11,7 +11,7 @@
 
 use hdphp\kernel\ServiceProvider;
 
-class UploadProvider extends ServiceProvider {
+class FileProvider extends ServiceProvider {
 
 	//延迟加载
 	public $defer = true;
