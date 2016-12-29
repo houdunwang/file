@@ -1,4 +1,6 @@
 <?php namespace houdunwang\file;
+use houdunwang\framework\build\Facade;
+
 /** .-------------------------------------------------------------------
  * |  Software: [HDCMS framework]
  * |      Site: www.hdcms.com
@@ -8,9 +10,7 @@
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
 
-use hdphp\kernel\ServiceFacade;
-
-class FileFacade extends ServiceFacade {
+class FileFacade extends Facade {
 	public static function getFacadeAccessor() {
 		return 'Upload';
 	}
