@@ -20,8 +20,8 @@ class FileProvider extends Provider {
 	}
 
 	public function register() {
-		$this->app->single( 'File', function ( $app ) {
-			return new File( $app );
+		$this->app->single( 'File', function (  ) {
+			return new File(  );
 		} );
 	}
 }
