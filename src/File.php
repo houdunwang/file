@@ -1,4 +1,8 @@
 <?php namespace houdunwang\file;
+
+use houdunwang\config\Config;
+use houdunwang\file\build\Base;
+
 /** .-------------------------------------------------------------------
  * |  Software: [HDCMS framework]
  * |      Site: www.hdcms.com
@@ -7,12 +11,12 @@
  * |    WeChat: aihoudun
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-
 class File {
 	protected $link;
 
 	protected function driver() {
 		$this->link = new Base();
+		$this->link->config( Config::get( 'upload' ) );
 
 		return $this;
 	}

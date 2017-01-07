@@ -1,4 +1,5 @@
 <?php namespace houdunwang\file;
+
 use houdunwang\framework\build\Provider;
 
 /** .-------------------------------------------------------------------
@@ -9,8 +10,6 @@ use houdunwang\framework\build\Provider;
  * |    WeChat: aihoudun
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-
-
 class FileProvider extends Provider {
 
 	//延迟加载
@@ -20,8 +19,8 @@ class FileProvider extends Provider {
 	}
 
 	public function register() {
-		$this->app->single( 'File', function (  ) {
-			return new File(  );
+		$this->app->single( 'File', function () {
+			return new File();
 		} );
 	}
 }

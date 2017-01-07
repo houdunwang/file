@@ -12,6 +12,6 @@ use houdunwang\framework\build\Facade;
 
 class FileFacade extends Facade {
 	public static function getFacadeAccessor() {
-		return 'Upload';
+		return 'File';
 	}
 }
