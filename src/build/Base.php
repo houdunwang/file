@@ -1,4 +1,7 @@
 <?php namespace houdunwang\file\build;
+
+use houdunwang\oss\Oss;
+
 /** .-------------------------------------------------------------------
  * |  Software: [HDCMS framework]
  * |      Site: www.hdcms.com
@@ -7,7 +10,6 @@
  * |    WeChat: aihoudun
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-
 class Base {
 	//上传类型
 	protected $type = 'jpg,jpeg,gif,png,zip,rar,doc,txt,pem';
@@ -110,25 +112,31 @@ class Base {
 	 * @return boolean
 	 */
 	private function save( $file ) {
-		$fileName = mt_rand( 1, 9999 ) . time() . "." . $file['ext'];
-		$filePath = $this->path . '/' . $fileName;
-		if ( ! move_uploaded_file( $file ['tmp_name'], $filePath ) && is_file( $filePath ) ) {
-			$this->error( '移动临时文件失败' );
+		if ( c( 'upload.mold' ) == 'oss' ) {
+			//阿里oss
+			return Oss::uploadFile( $file['filename'], $file['tmp_name'] );
+		} else {
+			$fileName = mt_rand( 1, 9999 ) . time() . "." . $file['ext'];
+			$filePath = $this->path . '/' . $fileName;
+			if ( ! move_uploaded_file( $file ['tmp_name'], $filePath ) && is_file( $filePath ) ) {
+				$this->error( '移动临时文件失败' );
 
-			return false;
+				return false;
+			}
+			$_info            = pathinfo( $filePath );
+			$arr              = [ ];
+			$arr['path']      = $filePath;
+			$arr['uptime']    = time();
+			$arr['fieldname'] = $file['fieldname'];
+			$arr['basename']  = $_info['basename'];
+			$arr['filename']  = $_info['filename']; //新文件名
+			$arr['name']      = $file['filename']; //旧文件名
+			$arr['size']      = $file['size'];
+			$arr['ext']       = $file['ext'];
+			$arr['dir']       = $this->path;
+			$arr['image']     = getimagesize( $filePath ) ? 1 : 0;
 		}
-		$_info            = pathinfo( $filePath );
-		$arr              = [ ];
-		$arr['path']      = $filePath;
-		$arr['uptime']    = time();
-		$arr['fieldname'] = $file['fieldname'];
-		$arr['basename']  = $_info['basename'];
-		$arr['filename']  = $_info['filename']; //新文件名
-		$arr['name']      = $file['filename']; //旧文件名
-		$arr['size']      = $file['size'];
-		$arr['ext']       = $file['ext'];
-		$arr['dir']       = $this->path;
-		$arr['image']     = getimagesize( $filePath ) ? 1 : 0;
+
 
 		return $arr;
 	}
