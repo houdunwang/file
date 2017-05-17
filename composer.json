@@ -1,7 +1,6 @@
 {
   "name": "houdunwang/file",
   "description": "File组件提供非常方便的上传处理与下载等相关功能",
-  "type": "project",
   "keywords": [
     "houdunwang",
     "hdphp",
