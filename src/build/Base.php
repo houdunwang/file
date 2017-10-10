@@ -83,7 +83,7 @@ class Base
      */
     private function save($file)
     {
-        if (c('upload.mold') == 'oss') {
+        if (Config::get('upload.mold') == 'oss') {
             //阿里oss
             $d = Oss::uploadFile($file['name'], $file['tmp_name']);
             if ( ! isset($d['info']) || ! isset($d['info']['url'])) {
